@@ -1,0 +1,9 @@
+.kekich{ text-decoration: line-through }
+.kekich {
+    text-decoration: line-through;
+    color: #B8C2CC;
+}
+
+.kekich:hover {
+    color: #8795A1;
+}

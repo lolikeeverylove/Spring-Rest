@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+<!--v-on:click = @click, :click может сработать от нажатия любой кнопки так что лучше не юзать-->
+<!--v-on:keyup.enter = @-->
+<div id = "shoppingList">
+    <div class="header">
+        <h1> {{header.toLocaleUpperCase()}}</h1>
+        <button v-if= "state==='default'"  class="btn btn-primary" @click="stateEdit('edit')">Add new</button>
+        <button v-else class="btn btn-cancel" @click="stateEdit('default')">Cancel</button>
+    </div>
+    <div class="add-item-form" v-if="state==='edit'">
+        <input v-model="newItem" type="text" placeholder="Add new item" @keyup.enter="saveItem">
+        <button class="btn btn-primary" @click="saveItem">Add item</button>
+    </div>
+    <a v-bind:href="newItem" >Dynamical refference</a>
+    <ul>
+        <li v-for="item in items"  @click="togglePurchased(item)" :class="[item.purchased ? 'strikeout' : '', item.highPriority ? 'priority' : '' ]">{{ item.label }}</li>
+    </ul>
+</div>
+
+
+</br></br></br></br>
+<div>
+    <div class="pos-f-t">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-dark p-4">
+                <h4 class="text-white">Collapsed content</h4>
+                <span class="text-muted">Toggleable via the navbar brand.</span>
+            </div>
+        </div>
+        <nav class="navbar navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img src="masha/masha.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Card with stretched link</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="http://google.com" class="btn btn-primary stretched-link">Go somewhere</a>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <!--текст вводится вместе с написанием-->
+    <div id="app-5">
+        <p>{{ message }}</p>
+        <textarea v-model="message" placeholder="введите несколько строчек"></textarea>
+    </div>
+    <!--подсказки-->
+    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+        Tooltip on top
+        <!--progress bar-->
+        <div class="progress" id = "kek">
+            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+        </div>
+    </button>
+</div>
+
+<!--инициализация подсказок-->
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+<script>
+    $('.toast').toast(option)
+    $('#element').toast('show')
+</script>
+
+<script src ="javaScript.js"></script>
+</body>
+</html>
