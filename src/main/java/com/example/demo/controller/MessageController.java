@@ -24,19 +24,19 @@ public class MessageController {
     }};
 
     @GetMapping
-    public List<Map<String, String>> list(){
+    public List<Map<String, String>> list() {
         return messages;
     }
     //при запросах месседж / какое то значение спринг будет вызывать виз метод
     @GetMapping("{id}")
     //path variable causer we in the путь вставляем айдишник
-    public Map<String,String> getOne(@PathVariable String id){
+    public Map<String, String> getOne(@PathVariable String id) {
         return getMessage(id);
     }
 
     private Map<String, String> getMessage(@PathVariable String id) {
         return messages.stream()
-                .filter(messages -> messages.get("id").equals(id))
+                .filter(message -> message.get("id").equals(id))
                 .findFirst()
                 .orElseThrow(NotFoundException::new);
     }
@@ -50,8 +50,7 @@ public class MessageController {
 
         return message;
     }
-
-    @PutMapping({"id"})//обновляем сообщения. добавляем крч! и обновляем айдишник!!
+    @PutMapping("{id}")//обновляем сообщения. добавляем крч! и обновляем айдишник!!
     public Map<String, String> update(@PathVariable String id, @RequestBody Map<String, String> message) {
         Map<String, String> messageFromDb = getMessage(id);
 
@@ -61,9 +60,9 @@ public class MessageController {
 
         return messageFromDb;
     }
-    @DeleteMapping({"id"})// delete messege
-    public void delete(@PathVariable String id){
-        Map<String, String> message = getMessage("id");
+    @DeleteMapping("{id}")//delete message
+    public void delete(@PathVariable String id) {
+        Map<String, String> message = getMessage(id);
 
         messages.remove(message);
     }
